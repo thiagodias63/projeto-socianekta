@@ -1,0 +1,52 @@
+
+Uma rede social chamada Socianekta solicitou ao time de desenvolvimento uma tela para que cidadãos brasileiros possam se cadastrar e informar as categorias de interesse para receberem novidades e se manterem informados.
+
+A Socianekta atualmente roda em um servidor Linux, com um Apache provendo páginas PHP para a web.
+Ela também nos adiantou que gostaria de solicitar os seguintes dados das pessoas ao se cadastrarem:
+
+* CPF (Obrigatório)
+* Nome completo (Obrigatório)
+* E-mail (Obrigatório se não for informado um Celular)
+* Celular (Obrigatório se não for informado um E-mail)
+* Data de nascimento (Opcional)
+
+O banco de dados onde os cadastros são salvos é um Microsft SQL Server e, neste banco, já existe a tabela de categorias:
+
+    CREATE TABLE [dbo].[categorias](
+        [codigo] [char](3) NOT NULL,
+        [descricao] [varchar](50) NOT NULL,
+    CONSTRAINT [PK_categorias] PRIMARY KEY CLUSTERED 
+    (
+        [codigo] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+    ) ON [PRIMARY]
+    GO
+
+    INSERT INTO [dbo].[categorias] (codigo, descricao)
+    VALUES
+        ('ADM', 'Administração'),
+        ('CON', 'Contabilidade'),
+        ('ENG', 'Engenharia'),
+        ('MED', 'Medicina'),
+        ('TEC', 'Tecnologia')
+    GO
+
+Uma pessoa poderá indicar uma, obrigatoriamente, ou mais categorias de interesse.
+
+
+Você deverá então:
+* Modelar a(s) tabela(s) necessária(s) e disponibilizar o(s) script(s) de criação dela(s), com seus devidos relacionamentos, se houver
+    Os scripts deverão estar no arquivo ./db/migration.sql do projeto
+* Disponibilizar o código em PHP em um repositório público do github e nos encaminhar a URL para validação
+
+PS: o código enviado não precisa ser funcional, mas é importante que os seguintes aspectos possam ser avaliados:
+
+    1) Preocupação com organização / identação dos códigos
+
+    2) Atenção aos detalhes no frontend (validações, uso de componentes, interação com o backend)
+        interessante uso de jQuery, Ajax e Bootstrap (demonstrar que conhece os conceitos de cada)
+
+    3) Para o backend, demonstrar:
+        3.1) entendimento do paradigma Orientado a Objetos
+        3.2) receber e sanitizar dados do frontend
+        3.3) manipulação dos dados junto ao banco de dados (https://www.php.net/manual/en/book.mssql.php)
